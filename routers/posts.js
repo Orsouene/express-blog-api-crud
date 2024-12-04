@@ -12,13 +12,13 @@ const {
 // INDEX
 routers.get("/", index);
 // SHOW
-routers.get("/id", show);
+routers.get("/:id", show);
 // CREATE
 routers.post("/", create);
 // UPDATE
-routers.put("/id", update);
+routers.put("/:id", update);
 // DELETE
-routers.delete("/id", destroy);
+routers.delete("/:id", destroy);
 
 // ESPORTAZIONE
 module.exports = routers;

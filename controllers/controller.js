@@ -7,7 +7,11 @@ function index(req, res) {
 }
 // SHOW
 function show(req, res) {
-  res.send("Visualizzare un elemento");
+  let id = parseInt(req.params.id);
+  item = menu.find((item) => item.id === id);
+  if (item) {
+    res.json(item);
+  } else res.status(404).json("nessun elemento trovato");
 }
 // CREATE
 function create(req, res) {
