@@ -11,7 +11,7 @@ function show(req, res) {
   item = menu.find((item) => item.id === id);
   if (item) {
     res.json(item);
-  } else res.status(404).json("nessun elemento trovato");
+  } else res.status(404).send("nessun elemento trovato");
 }
 // CREATE
 function create(req, res) {
@@ -23,7 +23,13 @@ function update(req, res) {
 }
 // DELETE
 function destroy(req, res) {
-  res.send("Eliminare un elemento");
+  let id = parseInt(req.params.id);
+  index = menu.findIndex((item) => item.id === id);
+  if (index !== -1) {
+    menu.splice(index, 1);
+    console.log(menu, "Il Nuovo conteggio del posts:", menu.length - 1);
+    res.status(204);
+  } else res.send("Eliminare un elemento");
 }
 
 // ESPORTAZIONE di tutti le funzione
