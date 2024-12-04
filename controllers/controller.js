@@ -1,9 +1,9 @@
 // Importato i miei "POSTS"
-const menu = require("../menu");
+const menu = require("../models/menu");
 
 // INDEX
 function index(req, res) {
-  res.send("Visualizzare tutti le elementi");
+  res.json(menu);
 }
 // SHOW
 function show(req, res) {
