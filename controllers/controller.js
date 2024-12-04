@@ -28,7 +28,7 @@ function destroy(req, res) {
   if (index !== -1) {
     menu.splice(index, 1);
     console.log(menu, "Il Nuovo conteggio del posts:", menu.length - 1);
-    res.status(204);
+    res.sendStatus(204);
   } else res.send("Eliminare un elemento");
 }
 
