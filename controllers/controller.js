@@ -1,3 +1,6 @@
+// Importato i miei "POSTS"
+const menu = require("../menu");
+
 // INDEX
 function index(req, res) {
   res.send("Visualizzare tutti le elementi");
