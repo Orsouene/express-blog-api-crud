@@ -30,7 +30,8 @@ function create(req, res) {
     tag: req.body.tag,
   };
   menu.push(newMenu);
-  res.status(201).json(newMenu);
+
+  res.status(201).json({ newMenu: newMenu, message: "Aggiunto un nuovo menu" });
 }
 // UPDATE
 function update(req, res) {
