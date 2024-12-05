@@ -15,7 +15,22 @@ function show(req, res) {
 }
 // CREATE
 function create(req, res) {
-  res.send("Creare un nuovo elemento");
+  console.log(req.body);
+  let newId = 0;
+  for (i = 0; i < menu.length; i++) {
+    if (menu[i].id > 0) {
+      newId = menu[i].id + 1;
+    }
+  }
+  let newMenu = {
+    id: newId,
+    titolo: req.body.titolo,
+    contenuto: req.body.contenuto,
+    immagine: req.body.immagine,
+    tag: req.body.tag,
+  };
+  menu.push(newMenu);
+  res.status(201).json(newMenu);
 }
 // UPDATE
 function update(req, res) {

@@ -4,11 +4,16 @@ const express = require("express");
 const app = express();
 // port da ascoltare nel localhost
 const PORT = 3000;
+
+// body parser
+app.use(express.json());
+
 // IMPORTARE IL POSTS
 const postRouters = require("./routers/posts");
 
 // ROUTER API
-app.use("/", postRouters);
+app.use("/posts", postRouters);
+
 // ROOT default
 app.get("/", (req, res) => {
   res.send("<h1>Il mio server</h1>");
