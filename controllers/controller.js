@@ -8,6 +8,7 @@ function index(req, res) {
 // SHOW
 function show(req, res) {
   let id = parseInt(req.params.id);
+  // Cerco l'item con il suo id
   item = menu.find((item) => item.id === id);
   if (item) {
     res.json(item);
@@ -16,6 +17,7 @@ function show(req, res) {
 // CREATE
 function create(req, res) {
   console.log(req.body);
+  // Assegnare al nuovo ID il valore più alto tra quelli presenti nell'array, incrementato di 1
   let newId = 0;
   for (i = 0; i < menu.length; i++) {
     if (menu[i].id > 0) {
@@ -31,15 +33,30 @@ function create(req, res) {
   };
   menu.push(newMenu);
 
-  res.status(201).json({ newMenu: newMenu, message: "Aggiunto un nuovo menu" });
+  res.status(201).json(newMenu);
 }
 // UPDATE
 function update(req, res) {
-  res.send("Modificare interamente un elemento");
+  console.log(req.body);
+  let id = parseInt(req.params.id);
+  // Cerco l'item con il suo id
+  item = menu.find((item) => item.id === id);
+  // Controllo se il parametro si riferisce ad un post esistente,
+  if (!item) {
+    res.status(404).json({ message: "ITEM-NOT-FOUND" });
+  }
+  // Prendo l'item Trovato
+  item.titolo = req.body.titolo;
+  item.contenuto = req.body.contenuto;
+  item.immagine = req.body.immagine;
+  item.tag = req.body.tag;
+  // Tutto il menu con il nuovo item
+  res.json(menu);
 }
 // DELETE
 function destroy(req, res) {
   let id = parseInt(req.params.id);
+  // Cerco l'indice dell'elemento che ha l'ID uguale all'ID indicato
   index = menu.findIndex((item) => item.id === id);
   if (index !== -1) {
     menu.splice(index, 1);
