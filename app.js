@@ -10,10 +10,12 @@ app.use(express.json());
 
 // IMPORTARE IL POSTS
 const postRouters = require("./routers/posts");
-
-// ROUTER API
+// importare chefs
+const chefsRouters = require("./routers/chefRouter");
+// ROUTER API DEL POSTS
 app.use("/posts", postRouters);
-
+// ROUTER API DEL CHEFS
+app.use("/chefs", chefsRouters);
 // ROOT default
 app.get("/", (req, res) => {
   res.send("<h1>Il mio server</h1>");
