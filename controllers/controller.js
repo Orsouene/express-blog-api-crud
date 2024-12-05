@@ -3,7 +3,14 @@ const menu = require("../models/menu");
 
 // INDEX
 function index(req, res) {
-  res.json(menu);
+  const tag = req.query.tags;
+  console.log(tag);
+  let newArray = [...menu];
+  if (tag) {
+    newArray = newArray.filter((item) => item.tags && item.tags.includes(tag));
+  }
+
+  res.json(newArray);
 }
 // SHOW
 function show(req, res) {
