@@ -15,7 +15,7 @@ function show(req, res) {
   } else res.status(404).json("nessun chef trovato");
 }
 // CREATE
-function create(req, res) {
+function store(req, res) {
   console.log(req.body);
   // Assegnare al nuovo ID il valore più alto tra quelli presenti nell'array, incrementato di 1
   let newId = 0;
@@ -62,4 +62,4 @@ function destroy(req, res) {
 }
 
 // ESPORTAZIONE di tutti le funzione
-module.exports = { index, show, create, update, destroy };
+module.exports = { index, show, store, update, destroy };

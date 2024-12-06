@@ -4,6 +4,9 @@ const menu = require("../models/menu");
 // INDEX
 function index(req, res) {
   const tag = req.query.tags;
+  // ERROR per il errorHandler :
+  // consolelog();
+
   console.log(tag);
   let newArray = [...menu];
   if (tag) {
@@ -22,7 +25,7 @@ function show(req, res) {
   } else res.status(404).json("nessun elemento trovato");
 }
 // CREATE
-function create(req, res) {
+function store(req, res) {
   console.log(req.body);
   // Assegnare al nuovo ID il valore più alto tra quelli presenti nell'array, incrementato di 1
   let newId = 0;
@@ -50,7 +53,7 @@ function update(req, res) {
   item = menu.find((item) => item.id === id);
   // Controllo se il parametro si riferisce ad un post esistente,
   if (!item) {
-    res.status(404).json({ message: "ITEM-NOT-FOUND" });
+    res.status(404).json({ Error: "ITEM-NOT-FOUND" });
   }
   // Prendo l'item Trovato
   item.titolo = req.body.titolo;
@@ -69,8 +72,9 @@ function destroy(req, res) {
     menu.splice(index, 1);
     console.log(menu, "Il Nuovo conteggio del posts:", menu.length - 1);
     res.sendStatus(204);
-  } else res.status(404).json("404-NOT-FOUND");
+  } else
+    res.status(404).json({ Error: "nessun elemento da eliminare trovato" });
 }
 
 // ESPORTAZIONE di tutti le funzione
-module.exports = { index, show, create, update, destroy };
+module.exports = { index, show, store, update, destroy };

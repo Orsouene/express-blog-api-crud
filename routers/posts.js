@@ -5,7 +5,7 @@ const routers = express.Router();
 const {
   index,
   show,
-  create,
+  store,
   update,
   destroy,
 } = require("../controllers/controller");
@@ -14,7 +14,7 @@ routers.get("/", index);
 // SHOW
 routers.get("/:id", show);
 // CREATE
-routers.post("/", create);
+routers.post("/", store);
 // UPDATE
 routers.put("/:id", update);
 // DELETE
