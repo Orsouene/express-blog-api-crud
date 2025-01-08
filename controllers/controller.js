@@ -41,22 +41,19 @@ function store(req, res) {
   console.log(req.body);
   // Assegnare al nuovo ID il valore più alto tra quelli presenti nell'array, incrementato di 1
   let newId = 0;
-  let nuovoConteggio = 0;
+  // let nuovoConteggio = 0;
   for (i = 0; i < dolciItaliani.length; i++) {
-    if (dolciItaliani[i].id > 0) {
-      newId = dolciItaliani[i].id + 1;
-      nuovoConteggio = newId;
+    if (dolciItaliani[i].id > newId) {
+      newId = dolciItaliani[i].id;
     }
   }
+  newId += 1;
   let newdolciItaliani = {
     id: newId,
-    titolo: req.body.titolo,
-
-    img: req.body.img,
-    tag: req.body.tags,
+    ...req.body,
   };
   dolciItaliani.push(newdolciItaliani);
-  dolciItaliani.push(" il nuovo conteggio è : " + nuovoConteggio);
+  // dolciItaliani.push(" il nuovo conteggio è : " + nuovoConteggio);
   res.status(201).json(dolciItaliani);
 }
 // UPDATE
