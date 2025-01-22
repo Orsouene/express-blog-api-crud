@@ -3,7 +3,6 @@ const dolciItaliani = [
     id: 1,
     titolo: "Tiramisu",
     img: "/img/tiramisu.jpg",
-
     tags: ["Classico", "Caffè", "Dessert"],
   },
   {
@@ -17,7 +16,6 @@ const dolciItaliani = [
     id: 3,
     titolo: "Panettone",
     img: "/img/panettone.jpeg",
-
     tags: ["Natale", "Tradizionale", "Dolce da forno"],
   },
 ];

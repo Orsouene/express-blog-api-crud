@@ -1,5 +1,7 @@
 // importato express sul app.js
 const express = require("express");
+// Connessione al database
+const connection = require("./connection");
 // importato CORS sul app.js
 var cors = require("cors");
 // istanza del server

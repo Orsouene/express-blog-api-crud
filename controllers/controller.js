@@ -1,35 +1,64 @@
+const connection = require("../connection");
+
 // Importato i miei "POSTS"
-const dolciItaliani = require("../models/menu");
-console.log(dolciItaliani);
+// const dolciItaliani = require("../models/menu");
+// console.log(dolciItaliani);
 
 // INDEX
 function index(req, res) {
-  //  Il query string è tags=pasta e req.query.tags restituirà il valore pasta nel mio esempio su postman
-  const tag = req.query.tags;
-  // ERROR per il errorHandler :
-  // consolelog();
-  // Console.log() per il debug
-  console.log(tag);
-  // Faccio un copia dell array originale
-  let newArray = [...dolciItaliani];
-  //  controlla il valore del parametro tags che ho passato nell'URL  esiste e ha un valore valido
-  if (tag) {
-    //  creo un nuovo array che contiene solo gli oggetti che hanno un tag che corrisponde al valore di tag.
-    newArray = newArray.filter(
-      (item) =>
-        // item.tags: Se item ha la proprietà tags (cioè, se esiste).
-        item.tags &&
-        // item.tags.includes(tag): Se la proprietà tags è un array e contiene il valore di tag
-        item.tags.includes(tag)
-    );
-  }
-
-  res.json(newArray);
+  const sql = "SELECT * FROM db_blog.posts";
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).json({ error: "DB query failed" });
+    console.log(results);
+    const res = {
+      totalCount: results.length,
+      data,
+    };
+    res.json(res);
+  });
 }
+//     Il query string è tags=pasta e req.query.tags restituirà il valore pasta nel mio esempio su postman
+//   const tag = req.query.tags;
+//   ERROR per il errorHandler :
+//   consolelog();
+//   Console.log() per il debug
+//   console.log(tag);
+//   Faccio un copia dell array originale
+//   let newArray = [...dolciItaliani];
+//   controlla il valore del parametro tags che ho passato nell'URL  esiste e ha un valore valido
+//   if (tag) {
+//     creo un nuovo array che contiene solo gli oggetti che hanno un tag che corrisponde al valore di tag.
+//     newArray = newArray.filter(
+//       (item) =>
+//          item.tags: Se item ha la proprietà tags (cioè, se esiste).
+//         item.tags &&
+//        item.tags.includes(tag): Se la proprietà tags è un array e contiene il valore di tag
+//         item.tags.includes(tag)
+//     );
+//   }
+
+//   res.json(newArray);
+// }
 // SHOW
 function show(req, res) {
+  //   let id = parseInt(req.params.id);
+  //   // la prima query
+  //   const sql = "SELECT * FROM db_blog.posts WHERE id=?";
+  //   // lanciare la query
+  //   connection.query(sql, [id], (err, results) => {
+  //     if (err) return res.status(500).json({ error: "DB query failed" });
+
+  //     const item = results[0];
+  //     if (!item) {
+  //       return res.status(404).json({ error: "l'elemento non esiste" });
+  //     }
+  //     // const myTags =
+
+  //     res.json({ success: true, item });
+  //   });
+  // }
   let id = parseInt(req.params.id);
-  // Cerco l'item che ha un id uguale a quello indicato nell endPoint
+  //  Cerco l'item che ha un id uguale a quello indicato nell endPoint
   item = dolciItaliani.find((item) => item.id === id);
   //  se ho trovato l'item
   if (item) {
@@ -77,8 +106,15 @@ function update(req, res) {
 }
 // DELETE
 function destroy(req, res) {
-  let id = parseInt(req.params.id);
-  // Cerco l'indice dell'elemento che ha l'ID uguale all'ID indicato
+  //   let id = parseInt(req.params.id);
+  //   const sql = "SELECT * FROM db_blog.posts WHERE id=?";
+  //   connection.query(sql, [id], (err, results) => {
+  //     if (err) return res.status(500).json({ error: "DB query failed" });
+  //     console.log(results);
+  //     res.sendStatus(204);
+  //   });
+  // }
+  // // Cerco l'indice dell'elemento che ha l'ID uguale all'ID indicato
   index = dolciItaliani.findIndex((item) => item.id === id);
   if (index !== -1) {
     dolciItaliani.splice(index, 1);
@@ -91,6 +127,5 @@ function destroy(req, res) {
   } else
     res.status(404).json({ Error: "nessun elemento da eliminare trovato" });
 }
-
 // ESPORTAZIONE di tutti le funzione
 module.exports = { index, show, store, update, destroy };
