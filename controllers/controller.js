@@ -1,5 +1,3 @@
-const connection = require("../connection");
-
 // Importato i miei "POSTS"
 const dolciItaliani = require("../models/menu");
 // console.log(dolciItaliani);
